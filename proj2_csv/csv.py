@@ -1,15 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.6
 
-#import numpy as np
+import src.paramparse as paramparse
+import src.converter as converter
 
-import paramparse
-
-
-print("Hello world")
-a = 5
-print(a)
-"""Komentar
-hkjh"""
 #kinosal = np.zeros((5, 5), dtype=int)
 """kinosal = []
 kinosal[2, 2] = 1
@@ -27,3 +20,5 @@ print(seznam)"""
 
 parser = paramparse.ParamParser()
 parser.parse()
+args = parser.processed_args
+convertor = converter.Converter(args)

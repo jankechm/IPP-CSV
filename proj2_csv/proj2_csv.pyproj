@@ -14,7 +14,7 @@
     <RootNamespace>proj2_csv</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>-r XxmLxmlkoelementik- -h -c XMml__-.a4 -l elem -i --start 3 -e --all-columns</CommandLineArguments>
+    <CommandLineArguments>-r XxmLxmlkoelementik- -h -c XMml__-.a4 -l elem -i --start 3 -e --all-columns -s TAB</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -26,16 +26,22 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="converter.py">
+    <Compile Include="src\converter.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="csv.py" />
-    <Compile Include="err.py">
+    <Compile Include="src\err.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="paramparse.py">
+    <Compile Include="src\paramparse.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
