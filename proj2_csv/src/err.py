@@ -5,9 +5,11 @@ class Error(object):
     """Class for terminating the script with corresponding return code,
     caused by non-valid input or operation"""
     class ErrorCodes(enum.IntEnum):
-        BAD_ARGS = 1
-        BAD_XML_ELEM = 30
-        BAD_XML_ELEM_SUBSTITUTED = 31
+        ARGS_ERR = 1
+        INPUT_FILE_OPENING_ERR = 2
+        OUTPUT_FILE_OPENING_ERR = 3
+        XML_ELEM_ERR = 30
+        XML_ELEM_SUBSTITUTED_ERR = 31
     
     @staticmethod
     def terminate(message, returnCode):

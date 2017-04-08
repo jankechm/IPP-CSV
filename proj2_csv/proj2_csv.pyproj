@@ -14,7 +14,7 @@
     <RootNamespace>proj2_csv</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>-r XxmLxmlkoelementik- -h -c XMml__-.a4 -l elem -i --start 3 -e --all-columns -s TAB</CommandLineArguments>
+    <CommandLineArguments>-r XxmLxmlkoelementik- -h -c XMml__-.a4 -l elem -i --start 3 -e --all-columns --input ../../Zadani/Testy/csv-supplementary-tests/test01.csv</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -30,10 +30,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="csv.py" />
+    <Compile Include="src\csv_input.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\err.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\paramparse.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\xml_output.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\__init__.py">
