@@ -14,7 +14,7 @@
     <RootNamespace>proj2_csv</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>-r XxmLxmlkoelementik- -h -c XMml__-.a4 -l elem -i --start 3 -e --all-columns --input ../../Zadani/Testy/csv-supplementary-tests/test01.csv</CommandLineArguments>
+    <CommandLineArguments>-l riadoček -i --start 325 -e --all-columns --input ../../Zadani/Testy/csv-supplementary-tests/test01.csv -r root --output myxml.xml</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -26,9 +26,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src\converter.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="csv.py" />
     <Compile Include="src\csv_input.py">
       <SubType>Code</SubType>

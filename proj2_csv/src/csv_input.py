@@ -25,13 +25,16 @@ class CSV(object):
     
     def read(self):
         reader = csv.reader(self._csv, delimiter=self._ops['delimiter'])
-        rownum = 1
+        row_num = 1
         for row in reader:
-            self._table[f'row{rownum}'] = dict()
-            colnum = 1
+            row_name = f'{self._ops["row_elem"]}{row_num}'
+            self._table[f'{row_name}'] = dict()
+            col_num = 1
             for col in row:
-                self._table[f'row{rownum}'][f'col{colnum}'] = col
-                colnum += 1
-            rownum += 1
-        print()
-        print(self._table)
+                col_name = f'{self._ops["col_elem"]}{col_num}'
+                self._table[f'{row_name}'][f'{col_name}'] = col
+                col_num += 1
+            row_num += 1
+        #print()
+        #print(self._table)
+        return self._table

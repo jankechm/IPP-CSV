@@ -5,7 +5,6 @@ import sys
 to std module csv"""
 sys.path.append(sys.path.pop(0))
 import src.paramparse as paramparse
-import src.converter as converter
 import src.csv_input as csv_input
 import src.xml_output as xml_output
 
@@ -18,11 +17,10 @@ parser = paramparse.ParamParser()
 parser.parse()
 args = parser.processed_args
 
-convertor = converter.Converter(args)
-
 csv = csv_input.CSV(args)
 csv.open()
-csv.read()
+table = csv.read()
 
-xml = xml_output.XML(args)
+xml = xml_output.XML(args, table)
 xml.open()
+xml.write()

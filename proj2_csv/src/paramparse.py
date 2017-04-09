@@ -40,7 +40,7 @@ class ParamParser(object):
             '--output', metavar='filename',
             help='output file (default: stdout)')
         self._parser.add_argument(
-            '-n', action='store_true', help='do not generate XML header')
+            '-n', action='store_false', help='do not generate XML header')
         self._parser.add_argument(
             '-r', metavar='root-element', help='name of the XML root element')
         self._parser.add_argument(
@@ -74,11 +74,12 @@ class ParamParser(object):
                 'option -e required')
 
     def _process_args(self):
-        print(self._parsed_args)
+        #print(self._parsed_args)
 
         self._process_help()
         self._process_input()
         self._process_output()
+        self._process_arg_n()
         self._process_arg_r()
         self._process_arg_s()
         self._process_arg_h()
@@ -90,8 +91,8 @@ class ParamParser(object):
         self._process_arg_missing_field()
         self._process_arg_all_columns()
 
-        print()
-        print(self.processed_args)
+        #print()
+        #print(self.processed_args)
 
     def _check_arg_val(self, arg, arg_val, regex, err_code):
         match = re.fullmatch(regex, arg_val, re.I)
@@ -103,6 +104,7 @@ class ParamParser(object):
         if (self._parsed_args.help):
             if (len(sys.argv) == 2):
                 self._parser.print_help()
+                sys.exit(0)
             else:
                 err.Error.terminate(
                     'Do not combine any args with --help\n\n',
@@ -114,12 +116,17 @@ class ParamParser(object):
     def _process_output(self):
         self._processed_args['output'] = self._parsed_args.output
 
+    def _process_arg_n(self):
+        self._processed_args['header'] = self._parsed_args.n
+
     def _process_arg_r(self):
         if (self._parsed_args.r):
             self._check_arg_val(
                 '-r', self._parsed_args.r, self._XML_ELEM_REGEX,
                 err.Error.ErrorCodes.XML_ELEM_ERR)
             self._processed_args['root_elem'] = self._parsed_args.r
+        else:
+            self._processed_args['root_elem'] = None
 
     def _process_arg_s(self):
         if (self._parsed_args.s):
@@ -152,29 +159,33 @@ class ParamParser(object):
             self._check_arg_val(
                 '-l', self._parsed_args.l, self._XML_ELEM_REGEX,
                 err.Error.ErrorCodes.XML_ELEM_ERR)
-            self._processed_args['line_elem'] = self._parsed_args.l
+            self._processed_args['row_elem'] = self._parsed_args.l
         else:
-            self._processed_args['line_elem'] = 'row'
+            self._processed_args['row_elem'] = 'row'
 
     def _process_arg_i(self):
         if (self._parsed_args.i):
             if (self._parsed_args.l):
                 self._processed_args['index_attr'] = 'index'
-                self._processed_args['index_attr_cnt'] = '1'
+                self._processed_args['index_attr_cnt'] = 1
             else:
                 err.Error.terminate(
                     '-i must be combined with -l\n\n',
                     err.Error.ErrorCodes.ARGS_ERR)
+        else:
+            self._processed_args['index_attr'] = ''
 
     def _process_arg_start(self):
         if (self._parsed_args.start):
             if (self._parsed_args.i and self._parsed_args.l):
                 self._processed_args['index_attr_cnt'] = (
-                    str(self._parsed_args.start))
+                    self._parsed_args.start)
             else:
                 err.Error.terminate(
                     '--start must be combined with -l and -i\n\n',
                     err.Error.ErrorCodes.ARGS_ERR)
+        else:
+            self._processed_args['index_attr_cnt'] = 1
 
     def _process_arg_e(self):
         self._processed_args['error_recovery'] = (
