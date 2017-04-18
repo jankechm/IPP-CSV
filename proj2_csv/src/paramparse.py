@@ -12,14 +12,14 @@ class ArgumentParser(argparse.ArgumentParser):
 
     def error(self, message):
         err.Error.terminate(
-            f'{self.prog} error: {message}\n\n', err.Error.ErrorCodes.ARGS_ERR)
+            f'{self.prog} error: {message}\n\n', err.ErrorCodes.ARGS_ERR)
 
 class ParamParser(object):
     """Parser of the script input options"""
 
     _XML_ELEM_REGEX = r"(?!(xml))[a-z][\w\-.]*"
     _CSV_SEPARATOR_REGEX = r'([ ;,]|TAB)'
-    _XML_ELEM_CHAR_REGEX = r'[\w\-.]*'
+    _XML_ELEM_SUBST_REGEX = r'[\w\-.]*'
 
     _processed_args = dict()
     
@@ -30,6 +30,7 @@ class ParamParser(object):
         self._add_args()
         self._parsed_args = self._parser.parse_args()
         self._process_args()
+        return self._processed_args
     
     def _add_args(self):
         self._parser.add_argument(
@@ -108,7 +109,7 @@ class ParamParser(object):
             else:
                 err.Error.terminate(
                     'Do not combine any args with --help\n\n',
-                    err.Error.ErrorCodes.ARGS_ERR)
+                    err.ErrorCodes.ARGS_ERR)
 
     def _process_input(self):
         self._processed_args['input'] = self._parsed_args.input
@@ -123,7 +124,7 @@ class ParamParser(object):
         if (self._parsed_args.r):
             self._check_arg_val(
                 '-r', self._parsed_args.r, self._XML_ELEM_REGEX,
-                err.Error.ErrorCodes.XML_ELEM_ERR)
+                err.ErrorCodes.XML_ELEM_ERR)
             self._processed_args['root_elem'] = self._parsed_args.r
         else:
             self._processed_args['root_elem'] = None
@@ -132,7 +133,7 @@ class ParamParser(object):
         if (self._parsed_args.s):
             self._check_arg_val(
                 '-s', self._parsed_args.s, self._CSV_SEPARATOR_REGEX,
-                err.Error.ErrorCodes.ARGS_ERR)
+                err.ErrorCodes.ARGS_ERR)
             if (self._parsed_args.s == 'TAB'):
                 self._processed_args['delimiter'] = '\t'
             else:
@@ -141,15 +142,15 @@ class ParamParser(object):
     def _process_arg_h(self):
         if (self._parsed_args.h):
             self._check_arg_val(
-                '-h', self._parsed_args.h, self._XML_ELEM_CHAR_REGEX,
-                err.Error.ErrorCodes.XML_ELEM_SUBSTITUTED_ERR)
+                '-h', self._parsed_args.h, self._XML_ELEM_SUBST_REGEX,
+                err.ErrorCodes.XML_ELEM_SUBSTITUTED_ERR)
             self._processed_args['subst'] = self._parsed_args.h
 
     def _process_arg_c(self):
         if (self._parsed_args.c):
             self._check_arg_val(
                 '-c', self._parsed_args.c, self._XML_ELEM_REGEX,
-                err.Error.ErrorCodes.XML_ELEM_ERR)
+                err.ErrorCodes.XML_ELEM_ERR)
             self._processed_args['col_elem'] = self._parsed_args.c
         else:
             self._processed_args['col_elem'] = 'col'
@@ -158,7 +159,7 @@ class ParamParser(object):
         if (self._parsed_args.l):
             self._check_arg_val(
                 '-l', self._parsed_args.l, self._XML_ELEM_REGEX,
-                err.Error.ErrorCodes.XML_ELEM_ERR)
+                err.ErrorCodes.XML_ELEM_ERR)
             self._processed_args['row_elem'] = self._parsed_args.l
         else:
             self._processed_args['row_elem'] = 'row'
@@ -171,7 +172,7 @@ class ParamParser(object):
             else:
                 err.Error.terminate(
                     '-i must be combined with -l\n\n',
-                    err.Error.ErrorCodes.ARGS_ERR)
+                    err.ErrorCodes.ARGS_ERR)
         else:
             self._processed_args['index_attr'] = ''
 
@@ -183,7 +184,7 @@ class ParamParser(object):
             else:
                 err.Error.terminate(
                     '--start must be combined with -l and -i\n\n',
-                    err.Error.ErrorCodes.ARGS_ERR)
+                    err.ErrorCodes.ARGS_ERR)
         else:
             self._processed_args['index_attr_cnt'] = 1
 
@@ -199,7 +200,7 @@ class ParamParser(object):
             else:
                 err.Error.terminate(
                     '--missing-field must be combined with -e\n\n',
-                    err.Error.ErrorCodes.ARGS_ERR)
+                    err.ErrorCodes.ARGS_ERR)
 
     def _process_arg_all_columns(self):
         if (self._parsed_args.all_columns):
@@ -208,7 +209,7 @@ class ParamParser(object):
             else:
                 err.Error.terminate(
                     '--all-columns must be combined with -e\n\n',
-                    err.Error.ErrorCodes.ARGS_ERR)
+                    err.ErrorCodes.ARGS_ERR)
 
     @property
     def processed_args(self):

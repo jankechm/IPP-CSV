@@ -14,13 +14,12 @@ for index in range(len(seznam)):
 print(seznam)"""
 
 parser = paramparse.ParamParser()
-parser.parse()
-args = parser.processed_args
+ops = parser.parse()
 
-csv = csv_input.CSV(args)
+csv = csv_input.CSV(ops)
 csv.open()
-table = csv.read()
+data = csv.load_data()
 
-xml = xml_output.XML(args, table)
+xml = xml_output.XML(ops)
 xml.open()
-xml.write()
+xml.write_data(data)

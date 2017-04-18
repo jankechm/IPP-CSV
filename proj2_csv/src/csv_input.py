@@ -4,7 +4,7 @@ import src.err as err
 import csv
 
 class CSV(object):
-    """CSV"""
+    """CSV input"""
     _table = dict()
 
     def __init__(self, ops, file=None):
@@ -19,11 +19,11 @@ class CSV(object):
             except OSError as e:
                 err.Error.terminate(
                     'Cannot open input file\n\n',
-                    err.Error.ErrorCodes.INPUT_FILE_OPENING_ERR)
+                    err.ErrorCodes.INPUT_FILE_OPENING_ERR)
         else:
             self._csv = sys.stdin
     
-    def read(self):
+    def load_data(self):
         reader = csv.reader(self._csv, delimiter=self._ops['delimiter'])
         row_num = 1
         for row in reader:

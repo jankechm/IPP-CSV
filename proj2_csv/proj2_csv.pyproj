@@ -14,7 +14,7 @@
     <RootNamespace>proj2_csv</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>-l riadoček -i --start 325 -e --all-columns --input ../../Zadani/Testy/csv-supplementary-tests/test01.csv -r root --output myxml.xml</CommandLineArguments>
+    <CommandLineArguments>-l row -i --start 5 -e --all-columns --input ../../Zadani/Testy/csv-supplementary-tests/test11.csv -h -r root</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
