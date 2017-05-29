@@ -8,11 +8,6 @@ import src.paramparse as paramparse
 import src.csv_input as csv_input
 import src.xml_output as xml_output
 
-"""seznam = [1, 5, 2, 4, 6, 3]
-for index in range(len(seznam)):
-    seznam[index] = seznam[index] + 1
-print(seznam)"""
-
 parser = paramparse.ParamParser()
 ops = parser.parse()
 

@@ -241,3 +241,13 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 *.xml
+
+*.zip
+
+proj2_csv/src/__pycache__/
+
+*.pyproj
+
+*.pdf
+
+*.docx

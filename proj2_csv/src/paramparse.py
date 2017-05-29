@@ -75,8 +75,6 @@ class ParamParser(object):
                 'option -e required')
 
     def _process_args(self):
-        #print(self._parsed_args)
-
         self._process_help()
         self._process_input()
         self._process_output()
@@ -91,9 +89,6 @@ class ParamParser(object):
         self._process_arg_e()
         self._process_arg_missing_field()
         self._process_arg_all_columns()
-
-        #print()
-        #print(self.processed_args)
 
     def _check_arg_val(self, arg, arg_val, regex, err_code):
         match = re.fullmatch(regex, arg_val, re.I)

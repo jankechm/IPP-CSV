@@ -35,6 +35,4 @@ class CSV(object):
                 self._table[f'{row_name}'][f'{col_name}'] = col
                 col_num += 1
             row_num += 1
-        #print()
-        #print(self._table)
         return self._table
