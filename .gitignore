@@ -251,3 +251,7 @@ proj2_csv/src/__pycache__/
 *.pdf
 
 *.docx
+
+*.pyc
+
+*.sln
