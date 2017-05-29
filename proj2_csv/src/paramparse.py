@@ -18,7 +18,7 @@ class ParamParser(object):
     """Parser of the script input options"""
 
     _XML_ELEM_REGEX = r"(?!(xml))[a-z][\w\-.]*"
-    _CSV_SEPARATOR_REGEX = r'([ ;,]|TAB)'
+    _CSV_SEPARATOR_REGEX = r'(.|TAB)'
     _XML_ELEM_SUBST_REGEX = r'[\w\-.]*'
 
     _processed_args = dict()
